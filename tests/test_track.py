@@ -12,9 +12,9 @@ from sclib.util import get_large_artwork_url
 CLIENT_ID = None
 TEST_TRACK = None
 
-TEST_TRACK_URL = 'https://soundcloud.com/mt-marcy/cold-nights'
-TEST_TRACK_TITLE = 'cold nights'
-TEST_TRACK_ARTIST = 'mt. marcy'
+TEST_TRACK_URL = 'https://soundcloud.com/spinninrecords/aylen-featuring-goshfather-spread'
+TEST_TRACK_TITLE = 'Aylen Featuring Goshfather - SPREAD [FREE DOWNLOAD]'
+TEST_TRACK_ARTIST = "Spinnin' Records"
 
 
 
@@ -100,8 +100,10 @@ def test_track_writes_mp3_album():
     track.album = 'Made in Abyss OST'
     track.artist = 'Kevin Pekin'
     track.track_no = ":^)"
-    with open(f'{track.artist} - {track.title}.mp3', 'wb+') as fp:
+    FILENAME = f'{track.artist} - {track.title}.mp3'
+    with open(FILENAME, 'wb+') as fp:
         track.write_mp3_to(fp)
+    os.remove(FILENAME)
 
 
 
