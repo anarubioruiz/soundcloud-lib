@@ -2,7 +2,7 @@ import pytest
 
 from sclib import SoundcloudAPI, Playlist
 
-PLAYLIST_URL = 'https://soundcloud.com/chilledcow/sets/hip-hop'
+PLAYLIST_URL = 'https://soundcloud.com/user-692461400/sets/lofi'
 TEST_PLAYLIST = None
 
 
