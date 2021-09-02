@@ -1,23 +1,11 @@
 # Soundcloud-lib
 This is a Soundcloud API library that doesn't require a client ID to function.  It's basic, it can really only fetch tracks and playlists, but doesn't require the user to go through the soundcloud app approval process.
-
-![Version](https://img.shields.io/badge/version-0.5.4-blue.svg)
-
-### Now works again! Soundcloud please stop changing how your site works :)
-# Why
-I once applied for API access and was approved.  I used this access for months until it was revoked for some reason and all my emails and new applications were ignored.  I decided to create a library that allows me to do Soundcloud API stuff without an approved application.
+Forked from: https://github.com/3jackdaws/soundcloud-lib
 
 # Features
-* Supports asyncio
 * Does not require a client ID
 * Fetches and writes mp3 metadata (Album artist, title, artwork)
 * Can fetch entire playlists of tracks
-
-# Installation
-This library is installable as a pip package.
-```
-pip install soundcloud-lib
-```
 
 # How
 This library uses **programming** and **algorithms** to find a client ID that can be used to access the Soundcloud API.
@@ -40,7 +28,6 @@ with open(filename, 'wb+') as fp:
 
 ```
 
-
 ## Fetch a playlist
 
 ```python
@@ -58,39 +45,6 @@ for track in playlist.tracks:
 
 ```
 
-## Asyncio Support
-```python
-from sclib.asyncio import SoundcloudAPI, Track
-
-api = SoundcloudAPI()
-track = await api.resolve('https://soundcloud.com/user/track')
-
-assert type(track) is Track
-
-filename = f'{track.artist} - {track.title}.mp3'
-
-with open(filename, 'wb+') as fp:
-    await track.write_mp3_to(fp)
-
-```
-
-## Fetch a playlist
-
-```python
-from sclib.asyncio import SoundcloudAPI, Track, Playlist
-
-api = SoundcloudAPI()
-playlist = await api.resolve('https://soundcloud.com/playlist_url')
-
-assert type(playlist) is Playlist
-
-for track in playlist.tracks:
-    filename = f'./{track.artist} - {track.title}.mp3'
-    with open(filename, 'wb+') as fp:
-        await track.write_mp3_to(fp)
-
-```
-
 ## Write Album Name or Track Number
 ```python
 from sclib import SoundcloudAPI, Track, Playlist
@@ -104,18 +58,7 @@ for track_number, track in enumerate(playlist):
         track.write_mp3_to(file)
 ```
 
-
 # Known Bugs
 
 ### This library cannot download tracks that are not marked "Downloadable". 
 "Downloadable" tracks have an MP3 representation while non-"Downloadable" ones only have HLS representations.  I would like to add HLS assembly to this library in the future.
-
-
-# Bugs or Features
-Please report any and all bugs using the issues tab.
-
-Feel free to request new features too.
-
-
-# Contributing
-Sure, submit a pull request.
