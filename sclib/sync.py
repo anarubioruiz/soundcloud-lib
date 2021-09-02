@@ -180,12 +180,7 @@ class Track:
     def clean_attributes(self):
         username = self.user['username']
         title = self.title
-        if " - " in title:
-            parts = title.split("-")
-            self.artist = parts[0].strip()
-            self.title = "-".join(parts[1:]).strip()
-        else:
-            self.artist = username
+        self.artist = username
 #
 #   Uses urllib
 #
