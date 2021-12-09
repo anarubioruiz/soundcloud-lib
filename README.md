@@ -7,6 +7,10 @@ Forked from: https://github.com/3jackdaws/soundcloud-lib
 * Fetches and writes mp3 metadata (Album artist, title, artwork)
 * Can fetch entire playlists of tracks
 
+# Requeriments
+* deb: python3-mutagen
+* deb: python3-bs4
+
 # How
 This library uses **programming** and **algorithms** to find a client ID that can be used to access the Soundcloud API.
 

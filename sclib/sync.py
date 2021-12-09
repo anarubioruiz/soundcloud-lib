@@ -2,7 +2,6 @@ from urllib.request import urlopen
 import json
 from . import util
 import random
-import io
 import mutagen
 from concurrent import futures
 from ssl import SSLContext
@@ -29,14 +28,8 @@ def get_obj_from(url):
         return False
 
 
-class UnsupportedFormatError(Exception): pass
-
-
-
 class SoundcloudAPI:
-    __slots__ = [
-        'client_id',
-    ]
+    __slots__ = ['client_id',]
     RESOLVE_URL = "https://api-v2.soundcloud.com/resolve?url={url}&client_id={client_id}"
     SEARCH_URL  = "https://api-v2.soundcloud.com/search?q={query}&client_id={client_id}&limit={limit}&offset={offset}"
     STREAM_URL  = "https://api.soundcloud.com/i1/tracks/{track_id}/streams?client_id={client_id}"
@@ -50,7 +43,6 @@ class SoundcloudAPI:
             self.client_id = client_id
         else:
             self.client_id = None
-
 
     def get_credentials(self):
         url = random.choice(util.SCRAPE_URLS)
@@ -164,7 +156,9 @@ class Track:
         "client",
         "ready"
     ]
+
     STREAM_URL = "https://api.soundcloud.com/i1/tracks/{track_id}/streams?client_id={client_id}"
+
     def __init__(self, *, obj=None, client=None):
         if not obj:
             raise ValueError("[Track]: obj must not be None")
@@ -181,9 +175,7 @@ class Track:
         username = self.user['username']
         title = self.title
         self.artist = username
-#
-#   Uses urllib
-#
+
     def write_mp3_to(self, fp):
         try:
             fp.seek(0)
@@ -210,9 +202,7 @@ class Track:
             if transcode['format']['protocol'] == 'progressive':
                 return transcode['url'] + "?client_id=" + self.client.client_id
         raise UnsupportedFormatError("As of soundcloud-lib 0.5.0, tracks that are not marked as 'Downloadable' cannot be downloaded because this library does not yet assemble HLS streams.")
-#
-#   Uses urllib
-#
+
     def get_stream_url(self):
         prog_url = self.get_prog_url()
         url_response = get_obj_from(prog_url)
